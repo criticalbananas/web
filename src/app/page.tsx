@@ -1,5 +1,9 @@
-import LandingScene from "@/app/_components/LandingScene";
+import BananaScene from '@/app/_components/BananaScene';
 
 export default function Home() {
-	return <LandingScene />;
+	return (
+		<main>
+			<BananaScene />
+		</main>
+	);
 }

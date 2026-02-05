@@ -1,0 +1,19 @@
+@reference "../../../styles/globals.css";
+
+.container {
+	@apply relative w-full h-screen overflow-hidden bg-[#fff0b3];
+}
+
+.flash {
+	@apply absolute inset-0 pointer-events-none bg-[#fff0b3];
+	animation: fadeOut 4s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
