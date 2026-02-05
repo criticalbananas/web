@@ -1,0 +1,16 @@
+.goldenWash {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background: #ffd863;
+	animation: fadeOut 4s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
