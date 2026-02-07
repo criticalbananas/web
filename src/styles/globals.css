@@ -123,7 +123,3 @@
 		@apply bg-background text-foreground;
 	}
 }
-
-.squircle {
-	corner-shape: squircle;
-}

@@ -1,6 +1,6 @@
 'use client';
 
-import { Detailed, Environment, Preload, useGLTF } from '@react-three/drei';
+import { Environment, Preload } from '@react-three/drei';
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { DepthOfField, EffectComposer, ToneMapping } from '@react-three/postprocessing';
 import { ToneMappingMode } from 'postprocessing';
@@ -8,12 +8,9 @@ import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
 
-import KaleidoscopeDither from './kaleidoscope-dither';
+import KaleidoscopeDither from '../kaleidoscope-dither';
+import { BananaModel } from './banana-model';
 import styles from './scene.module.css';
-
-const MODEL_URL = '/landing/banana_v1.glb';
-
-useGLTF.preload(MODEL_URL);
 
 /* ------------------------------------------------------------------ Shared mouse state */
 
@@ -32,7 +29,6 @@ function Banana({ index, z, speed }: BananaProps) {
 	const ref = useRef<THREE.LOD>(null!);
 	const { viewport, camera } = useThree();
 	const { width, height } = viewport.getCurrentViewport(camera, [0, 0, -z]);
-	const { nodes, materials } = useGLTF(MODEL_URL);
 
 	const data = useRef({
 		y: THREE.MathUtils.randFloatSpread(height * 2),
@@ -117,25 +113,7 @@ function Banana({ index, z, speed }: BananaProps) {
 		}
 	});
 
-	return (
-		<Detailed ref={ref} distances={[0, 65, 80]}>
-			<mesh
-				geometry={(nodes.banana_high as THREE.Mesh).geometry}
-				material={materials.skin}
-				material-emissive="#ff9f00"
-			/>
-			<mesh
-				geometry={(nodes.banana_mid as THREE.Mesh).geometry}
-				material={materials.skin}
-				material-emissive="#ff9f00"
-			/>
-			<mesh
-				geometry={(nodes.banana_low as THREE.Mesh).geometry}
-				material={materials.skin}
-				material-emissive="#ff9f00"
-			/>
-		</Detailed>
-	);
+	return <BananaModel ref={ref} />;
 }
 
 /* ------------------------------------------------------------------ CenterLogo */

@@ -33,7 +33,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
 			<body className={cn('bg-background text-foreground min-h-screen font-sans antialiased', jetbrainsMono.variable)}>
-				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+				<ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
 					{children}
 					<TailwindIndicator />
 				</ThemeProvider>
