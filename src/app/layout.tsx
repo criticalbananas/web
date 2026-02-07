@@ -1,5 +1,8 @@
 import '@/styles/globals.css';
 import type { Metadata } from 'next';
+import { JetBrains_Mono } from "next/font/google";
+
+const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
 	title: 'Critical Bananas | The Vibe Check Game',
@@ -13,7 +16,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" suppressHydrationWarning>
+		<html lang="en" suppressHydrationWarning className={jetbrainsMono.variable}>
 			<body className="min-h-screen">
 				{children}
 			</body>
