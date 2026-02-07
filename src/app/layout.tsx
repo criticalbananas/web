@@ -3,8 +3,8 @@ import '@/styles/globals.css';
 import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 
-import { siteConfig } from '@/app/config/site.config';
 import { TailwindIndicator } from '@/components/helpers/tailwind-indicator';
+import { siteConfig } from '@/config/site.config';
 import { jetbrainsMono } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
 
