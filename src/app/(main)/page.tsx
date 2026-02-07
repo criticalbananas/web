@@ -4,7 +4,7 @@ import Link from 'next/link';
 import BananaScene from '@/components/common/banana-scene';
 import { Button } from '@/components/ui/button';
 
-import CountdownTimer from './_components/CountdownTimer';
+import CountdownTimer from './_components/countdown-timer';
 
 export default function Home() {
 	return (
