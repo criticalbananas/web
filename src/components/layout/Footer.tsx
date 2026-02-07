@@ -3,12 +3,12 @@ import Link from 'next/link';
 
 export default function Footer() {
 	return (
-		<footer className="ml-14 py-6 px-10 flex items-center justify-between">
+		<footer className="ml-14 flex items-center justify-between px-10 py-6">
 			<div className="flex items-center gap-6">
 				<Image src="/logo.png" alt="Critical Bananas" width={24} height={24} />
-				<span className="text-[10px] tracking-[0.25em] text-muted-foreground font-mono">CRITICAL BANANAS</span>
+				<span className="text-muted-foreground font-mono text-[10px] tracking-[0.25em]">CRITICAL BANANAS</span>
 			</div>
-			<div className="flex items-center gap-6 text-[10px] tracking-[0.2em] text-muted-foreground font-mono">
+			<div className="text-muted-foreground flex items-center gap-6 font-mono text-[10px] tracking-[0.2em]">
 				<Link href="#" className="hover:text-foreground transition-colors">
 					TERMS
 				</Link>
