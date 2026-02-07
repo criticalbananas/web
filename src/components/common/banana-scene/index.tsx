@@ -1,15 +1,15 @@
 'use client';
 
-import styles from './scene.module.css';
-
-import * as THREE from 'three';
-import { Suspense, useRef, useMemo, useEffect, useState } from 'react';
-import { Canvas, useThree, useFrame, useLoader } from '@react-three/fiber';
-import { useGLTF, Detailed, Environment, Preload } from '@react-three/drei';
-import { EffectComposer, DepthOfField, ToneMapping } from '@react-three/postprocessing';
+import { Detailed, Environment, Preload, useGLTF } from '@react-three/drei';
+import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
+import { DepthOfField, EffectComposer, ToneMapping } from '@react-three/postprocessing';
 import { ToneMappingMode } from 'postprocessing';
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import * as THREE from 'three';
 import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
-import KaleidoscopeDither from './KaleidoscopeDither';
+
+import KaleidoscopeDither from './kaleidoscope-dither';
+import styles from './scene.module.css';
 
 const MODEL_URL = '/landing/banana_v1.glb';
 
@@ -43,10 +43,11 @@ function Banana({ index, z, speed }: BananaProps) {
 		scale: THREE.MathUtils.randFloat(0.25, 0.75),
 		drift: THREE.MathUtils.randFloat(0.4, 1.6),
 		// interaction offsets
-		gx: 0, gy: 0, // gravity well
-		wx: 0,         // wind
-		sx: 0,         // depth swim
-		lean: 0,       // wind lean
+		gx: 0,
+		gy: 0, // gravity well
+		wx: 0, // wind
+		sx: 0, // depth swim
+		lean: 0, // wind lean
 	});
 
 	useFrame((state, dt) => {
@@ -60,8 +61,8 @@ function Banana({ index, z, speed }: BananaProps) {
 		// Mouse in world space at this banana's depth
 		const mx = mouse.x * width * 0.5;
 		const my = mouse.y * height * 0.5;
-		const dx = (bx + d.gx) - mx;
-		const dy = (d.y + d.gy) - my;
+		const dx = bx + d.gx - mx;
+		const dy = d.y + d.gy - my;
 		const dist = Math.sqrt(dx * dx + dy * dy);
 		const proximity = Math.max(0, 1 - dist / 8);
 
@@ -102,9 +103,9 @@ function Banana({ index, z, speed }: BananaProps) {
 		// Magnetic spin — proximity boosts spin speed
 		const spinBoost = 1 + proximity * 4;
 		ref.current.rotation.set(
-			(d.rX += dt / d.spin * spinBoost),
+			(d.rX += (dt / d.spin) * spinBoost),
 			Math.sin(index * 1000 + state.clock.elapsedTime / 10) * Math.PI + d.lean,
-			(d.rZ += dt / d.spin * spinBoost)
+			(d.rZ += (dt / d.spin) * spinBoost)
 		);
 		ref.current.scale.setScalar(d.scale);
 
@@ -146,9 +147,7 @@ function CenterLogo() {
 	const svg = useLoader(SVGLoader, '/logo.svg');
 
 	const shapes = useMemo(() => {
-		return svg.paths.flatMap((path) =>
-			SVGLoader.createShapes(path).map((shape) => ({ shape }))
-		);
+		return svg.paths.flatMap((path) => SVGLoader.createShapes(path).map((shape) => ({ shape })));
 	}, [svg]);
 
 	useFrame((state) => {
@@ -167,12 +166,7 @@ function CenterLogo() {
 					{shapes.map(({ shape }, i) => (
 						<mesh key={i}>
 							<shapeGeometry args={[shape]} />
-							<meshBasicMaterial
-								color="#5e3200"
-								transparent
-								opacity={0.5}
-								side={THREE.DoubleSide}
-							/>
+							<meshBasicMaterial color="#5e3200" transparent opacity={0.5} side={THREE.DoubleSide} />
 						</mesh>
 					))}
 				</group>
@@ -197,10 +191,7 @@ function Rig() {
 		prev.current.y = state.pointer.y;
 
 		// Subtle camera shift — just enough for the logo to feel alive
-		state.camera.position.lerp(
-			_v.set(state.pointer.x * 0.1, state.pointer.y * 0.07, 10),
-			0.02
-		);
+		state.camera.position.lerp(_v.set(state.pointer.x * 0.1, state.pointer.y * 0.07, 10), 0.02);
 		state.camera.lookAt(0, 0, 0);
 	});
 	return null;

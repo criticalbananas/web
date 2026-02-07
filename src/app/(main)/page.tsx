@@ -1,80 +1,80 @@
+import { ArrowRight, ExternalLink, Fingerprint, Shield, Wallet, Zap } from 'lucide-react';
 import Link from 'next/link';
-import { ArrowRight, Wallet, Shield, Zap, Fingerprint, ExternalLink } from 'lucide-react';
+
+import BananaScene from '@/components/common/banana-scene';
 import { Button } from '@/components/ui/button';
-import BananaScene from '@/components/common/BananaScene';
+
 import CountdownTimer from './_components/CountdownTimer';
 
 export default function Home() {
 	return (
 		<>
 			{/* Hero Section */}
-			<section className="ml-14 pt-14 min-h-screen grid grid-cols-12 relative">
+			<section className="relative ml-14 grid min-h-screen grid-cols-12 pt-14">
 				{/* 3D Logo Scene */}
-				<div className="col-span-5 relative border-r border-border">
+				<div className="border-border relative col-span-5 border-r">
 					<div className="sticky top-14 h-[calc(100vh-3.5rem)]">
 						<BananaScene />
-						<div className="absolute bottom-6 left-6 right-6 z-10">
-							<p className="text-[10px] tracking-[0.25em] text-muted-foreground font-mono mb-1">SYMBOL / 01</p>
-							<p className="text-xs text-foreground/60">The Critical Banana. Your ticket to the arena.</p>
+						<div className="absolute right-6 bottom-6 left-6 z-10">
+							<p className="text-muted-foreground mb-1 font-mono text-[10px] tracking-[0.25em]">SYMBOL / 01</p>
+							<p className="text-foreground/60 text-xs">The Critical Banana. Your ticket to the arena.</p>
 						</div>
 					</div>
 				</div>
 
 				{/* Content Column */}
 				<div className="col-span-7 flex flex-col">
-					<div className="flex-1 flex flex-col justify-center px-10 py-20 border-b border-border">
+					<div className="border-border flex flex-1 flex-col justify-center border-b px-10 py-20">
 						<div className="mb-6">
-							<span className="text-[10px] tracking-[0.3em] text-muted-foreground font-mono">
+							<span className="text-muted-foreground font-mono text-[10px] tracking-[0.3em]">
 								BNB SMART CHAIN / ARENA PROTOCOL
 							</span>
 						</div>
-						<h1 className="font-[family-name:var(--font-heading)] text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.85] tracking-tight mb-6">
+						<h1 className="mb-6 font-[family-name:var(--font-heading)] text-6xl leading-[0.85] font-bold tracking-tight lg:text-7xl xl:text-8xl">
 							<span className="block">LIQUIDATE</span>
-							<span className="block text-primary">THE CROWD.</span>
+							<span className="text-primary block">THE CROWD.</span>
 						</h1>
-						<p className="text-base text-muted-foreground max-w-lg leading-relaxed mb-10 font-mono">
+						<p className="text-muted-foreground mb-10 max-w-lg font-mono text-base leading-relaxed">
 							1,000 Traders. 3 Lanes. 5 Minutes. Survival is a skill. The most crowded lane gets crushed — don{"'"}t be
 							in it.
 						</p>
 						<div className="flex items-center gap-4">
 							<Button
 								size="lg"
-								className="gap-2 text-xs tracking-[0.15em] bg-primary text-primary-foreground hover:bg-accent h-12 px-8 font-mono"
+								className="bg-primary text-primary-foreground hover:bg-accent h-12 gap-2 px-8 font-mono text-xs tracking-[0.15em]"
 							>
 								JOIN ACTIVE LOBBY
-								<ArrowRight className="w-4 h-4" />
+								<ArrowRight className="h-4 w-4" />
 							</Button>
 							<Button
 								variant="outline"
 								size="lg"
-								className="gap-2 text-xs tracking-[0.15em] h-12 px-8 bg-transparent font-mono"
+								className="h-12 gap-2 bg-transparent px-8 font-mono text-xs tracking-[0.15em]"
 							>
 								VIEW CONTRACT AUDIT
-								<ExternalLink className="w-3 h-3" />
+								<ExternalLink className="h-3 w-3" />
 							</Button>
 						</div>
 					</div>
 
 					{/* Live Data Ribbon */}
-					<div className="grid grid-cols-4 border-b border-border">
+					<div className="border-border grid grid-cols-4 border-b">
 						{[
 							{ value: '12', label: 'ACTIVE LOBBIES', pulse: true },
 							{ value: '14.5k', label: 'BNB PAID OUT', unit: 'BNB' },
 							{ value: 'COUNTDOWN', label: 'NEXT CRUSH IN', isTimer: true },
 							{ value: '10%', label: 'COMMISSION', sub: 'FLAT' },
 						].map((stat, i) => (
-							<div key={i} className="p-5 border-r border-border last:border-r-0 group hover:bg-card transition-colors">
-								<div className="flex items-center gap-2 mb-1">
-									{stat.pulse && (
-										<span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-									)}
-									<p className="font-[family-name:var(--font-heading)] text-2xl font-bold text-foreground">
+							<div key={i} className="border-border group hover:bg-card border-r p-5 transition-colors last:border-r-0">
+								<div className="mb-1 flex items-center gap-2">
+									{stat.pulse && <span className="bg-primary h-1.5 w-1.5 animate-pulse rounded-full" />}
+									<p className="text-foreground font-[family-name:var(--font-heading)] text-2xl font-bold">
 										{stat.isTimer ? <CountdownTimer /> : stat.value}
 									</p>
-									{stat.unit && <span className="text-[10px] text-primary font-mono">{stat.unit}</span>}
-									{stat.sub && <span className="text-[10px] text-muted-foreground font-mono">{stat.sub}</span>}
+									{stat.unit && <span className="text-primary font-mono text-[10px]">{stat.unit}</span>}
+									{stat.sub && <span className="text-muted-foreground font-mono text-[10px]">{stat.sub}</span>}
 								</div>
-								<p className="text-[10px] tracking-[0.2em] text-muted-foreground font-mono">{stat.label}</p>
+								<p className="text-muted-foreground font-mono text-[10px] tracking-[0.2em]">{stat.label}</p>
 							</div>
 						))}
 					</div>
@@ -82,23 +82,23 @@ export default function Home() {
 			</section>
 
 			{/* Rules of the Arena */}
-			<section id="rules" className="ml-14 border-b border-border">
+			<section id="rules" className="border-border ml-14 border-b">
 				<div className="grid grid-cols-12">
-					<div className="col-span-3 border-r border-border p-8 flex flex-col justify-between min-h-[500px]">
+					<div className="border-border col-span-3 flex min-h-[500px] flex-col justify-between border-r p-8">
 						<div>
-							<p className="text-[10px] tracking-[0.3em] text-muted-foreground font-mono mb-3">MECHANISM</p>
-							<h2 className="font-[family-name:var(--font-heading)] text-4xl lg:text-5xl font-bold leading-[0.9]">
+							<p className="text-muted-foreground mb-3 font-mono text-[10px] tracking-[0.3em]">MECHANISM</p>
+							<h2 className="font-[family-name:var(--font-heading)] text-4xl leading-[0.9] font-bold lg:text-5xl">
 								<span className="block">RULES</span>
 								<span className="block">OF THE</span>
-								<span className="block text-primary">ARENA</span>
+								<span className="text-primary block">ARENA</span>
 							</h2>
 						</div>
-						<p className="text-xs text-muted-foreground leading-relaxed font-mono">
+						<p className="text-muted-foreground font-mono text-xs leading-relaxed">
 							No luck. No RNG. Pure game theory and crowd psychology.
 						</p>
 					</div>
 					<div className="col-span-9">
-						<div className="grid grid-cols-2 grid-rows-2 h-full">
+						<div className="grid h-full grid-cols-2 grid-rows-2">
 							{[
 								{
 									step: '01',
@@ -127,19 +127,17 @@ export default function Home() {
 							].map((mode, i) => (
 								<div
 									key={i}
-									className="border-b border-r border-border last:border-r-0 [&:nth-child(2)]:border-r-0 [&:nth-child(3)]:border-b-0 [&:nth-child(4)]:border-b-0 p-8 group hover:bg-card transition-colors relative overflow-hidden"
+									className="border-border group hover:bg-card relative overflow-hidden border-r border-b p-8 transition-colors last:border-r-0 [&:nth-child(2)]:border-r-0 [&:nth-child(3)]:border-b-0 [&:nth-child(4)]:border-b-0"
 								>
-									<span className="absolute -right-6 -bottom-10 text-[180px] font-bold text-border/20 select-none pointer-events-none leading-none">
+									<span className="text-border/20 pointer-events-none absolute -right-6 -bottom-10 text-[180px] leading-none font-bold select-none">
 										{mode.kanji}
 									</span>
 									<div className="relative z-10">
-										<p className="text-[10px] tracking-[0.3em] text-primary mb-3 font-mono">
-											STEP {mode.step}
-										</p>
-										<h3 className="font-[family-name:var(--font-heading)] text-xl font-bold mb-3 tracking-wide">
+										<p className="text-primary mb-3 font-mono text-[10px] tracking-[0.3em]">STEP {mode.step}</p>
+										<h3 className="mb-3 font-[family-name:var(--font-heading)] text-xl font-bold tracking-wide">
 											{mode.title}
 										</h3>
-										<p className="text-sm text-muted-foreground leading-relaxed">{mode.desc}</p>
+										<p className="text-muted-foreground text-sm leading-relaxed">{mode.desc}</p>
 									</div>
 								</div>
 							))}
@@ -149,37 +147,36 @@ export default function Home() {
 			</section>
 
 			{/* Proof of Fairness */}
-			<section id="proof" className="ml-14 border-b border-border">
+			<section id="proof" className="border-border ml-14 border-b">
 				<div className="grid grid-cols-12">
-					<div className="col-span-5 border-r border-border p-10 flex flex-col justify-center min-h-[500px]">
-						<p className="text-[10px] tracking-[0.3em] text-muted-foreground font-mono mb-4">THE TERMINAL LOGIC</p>
-						<h2 className="font-[family-name:var(--font-heading)] text-5xl lg:text-6xl font-bold leading-[0.85] mb-6">
+					<div className="border-border col-span-5 flex min-h-[500px] flex-col justify-center border-r p-10">
+						<p className="text-muted-foreground mb-4 font-mono text-[10px] tracking-[0.3em]">THE TERMINAL LOGIC</p>
+						<h2 className="mb-6 font-[family-name:var(--font-heading)] text-5xl leading-[0.85] font-bold lg:text-6xl">
 							<span className="block">DETERMI&shy;</span>
 							<span className="block">NISTIC.</span>
-							<span className="block text-primary">NOT</span>
-							<span className="block text-primary">RANDOM.</span>
+							<span className="text-primary block">NOT</span>
+							<span className="text-primary block">RANDOM.</span>
 						</h2>
-						<p className="text-sm text-muted-foreground leading-relaxed mb-8">
+						<p className="text-muted-foreground mb-8 text-sm leading-relaxed">
 							Critical Bananas uses zero RNG. Our logic is a transparent math engine. No AI black boxes. No house edge.
 							Just player vs. player psychology.
 						</p>
-						<Button variant="outline" className="gap-2 text-[10px] tracking-[0.15em] bg-transparent w-fit font-mono">
+						<Button variant="outline" className="w-fit gap-2 bg-transparent font-mono text-[10px] tracking-[0.15em]">
 							VIEW ON BSCSCAN
-							<ExternalLink className="w-3 h-3" />
+							<ExternalLink className="h-3 w-3" />
 						</Button>
 					</div>
 
 					{/* Code Block */}
-					<div className="col-span-7 bg-card p-10 flex flex-col justify-center">
-						<p className="text-[10px] tracking-[0.3em] text-muted-foreground mb-4 font-mono">
+					<div className="bg-card col-span-7 flex flex-col justify-center p-10">
+						<p className="text-muted-foreground mb-4 font-mono text-[10px] tracking-[0.3em]">
 							TOURNAMENT.SOL / PAYWINNERS()
 						</p>
-						<pre className="text-sm leading-relaxed font-mono overflow-x-auto">
+						<pre className="overflow-x-auto font-mono text-sm leading-relaxed">
 							<code>
 								<span className="text-muted-foreground">{'// Deterministic crush logic'}</span>
 								{'\n'}
-								<span className="text-primary">function</span>{' '}
-								<span className="text-foreground">payWinners</span>
+								<span className="text-primary">function</span> <span className="text-foreground">payWinners</span>
 								{'() '}
 								<span className="text-muted-foreground">{'{'}</span>
 								{'\n'}
@@ -253,10 +250,10 @@ export default function Home() {
 			</section>
 
 			{/* Built for Performance */}
-			<section id="specs" className="ml-14 border-b border-border">
+			<section id="specs" className="border-border ml-14 border-b">
 				<div className="grid grid-cols-12">
-					<div className="col-span-2 border-r border-border p-8">
-						<p className="text-[10px] tracking-[0.25em] text-muted-foreground [writing-mode:vertical-lr] rotate-180 font-mono">
+					<div className="border-border col-span-2 border-r p-8">
+						<p className="text-muted-foreground rotate-180 font-mono text-[10px] tracking-[0.25em] [writing-mode:vertical-lr]">
 							PERFORMANCE
 						</p>
 					</div>
@@ -264,21 +261,21 @@ export default function Home() {
 						<div className="grid grid-cols-3">
 							{[
 								{
-									icon: <Fingerprint className="w-5 h-5" />,
+									icon: <Fingerprint className="h-5 w-5" />,
 									title: 'PASSKEY LOGIN',
 									desc: 'No seed phrases. No extensions. Sign in with FaceID or TouchID and start playing in seconds.',
 									stat: '0 CLICKS',
 									statLabel: 'TO AUTHENTICATE',
 								},
 								{
-									icon: <Zap className="w-5 h-5" />,
+									icon: <Zap className="h-5 w-5" />,
 									title: 'SUB-SECOND SPEED',
 									desc: 'Built on BNB Smart Chain. Your moves are recorded in 450ms. Settlement is instant.',
 									stat: '450ms',
 									statLabel: 'BLOCK CONFIRMATION',
 								},
 								{
-									icon: <Shield className="w-5 h-5" />,
+									icon: <Shield className="h-5 w-5" />,
 									title: 'NON-CUSTODIAL',
 									desc: 'We never touch your keys. The Smart Contract handles the money. You handle the strategy.',
 									stat: '100%',
@@ -287,22 +284,22 @@ export default function Home() {
 							].map((feat, i) => (
 								<div
 									key={i}
-									className="border-r border-border last:border-r-0 p-8 hover:bg-card transition-colors group flex flex-col justify-between min-h-[350px]"
+									className="border-border hover:bg-card group flex min-h-[350px] flex-col justify-between border-r p-8 transition-colors last:border-r-0"
 								>
 									<div>
-										<div className="w-10 h-10 border border-border flex items-center justify-center text-primary mb-6 group-hover:border-primary/40 transition-colors">
+										<div className="border-border text-primary group-hover:border-primary/40 mb-6 flex h-10 w-10 items-center justify-center border transition-colors">
 											{feat.icon}
 										</div>
-										<h3 className="font-[family-name:var(--font-heading)] text-lg font-bold mb-3 tracking-wide">
+										<h3 className="mb-3 font-[family-name:var(--font-heading)] text-lg font-bold tracking-wide">
 											{feat.title}
 										</h3>
-										<p className="text-sm text-muted-foreground leading-relaxed">{feat.desc}</p>
+										<p className="text-muted-foreground text-sm leading-relaxed">{feat.desc}</p>
 									</div>
-									<div className="pt-6 border-t border-border mt-8">
-										<p className="font-[family-name:var(--font-heading)] text-3xl font-bold text-primary">
+									<div className="border-border mt-8 border-t pt-6">
+										<p className="text-primary font-[family-name:var(--font-heading)] text-3xl font-bold">
 											{feat.stat}
 										</p>
-										<p className="text-[10px] tracking-[0.2em] text-muted-foreground font-mono mt-1">
+										<p className="text-muted-foreground mt-1 font-mono text-[10px] tracking-[0.2em]">
 											{feat.statLabel}
 										</p>
 									</div>
@@ -314,11 +311,11 @@ export default function Home() {
 			</section>
 
 			{/* CTA */}
-			<section className="ml-14 border-b border-border">
-				<div className="grid grid-cols-12 min-h-[350px]">
-					<div className="col-span-8 border-r border-border p-10 flex flex-col justify-center">
-						<p className="text-[10px] tracking-[0.3em] text-muted-foreground font-mono mb-3">ENTER THE ARENA</p>
-						<h2 className="font-[family-name:var(--font-heading)] text-4xl lg:text-5xl font-bold leading-[0.9] mb-8">
+			<section className="border-border ml-14 border-b">
+				<div className="grid min-h-[350px] grid-cols-12">
+					<div className="border-border col-span-8 flex flex-col justify-center border-r p-10">
+						<p className="text-muted-foreground mb-3 font-mono text-[10px] tracking-[0.3em]">ENTER THE ARENA</p>
+						<h2 className="mb-8 font-[family-name:var(--font-heading)] text-4xl leading-[0.9] font-bold lg:text-5xl">
 							The crowd is already
 							<br />
 							moving. <span className="text-primary">Pick your lane.</span>
@@ -326,15 +323,15 @@ export default function Home() {
 						<div className="flex items-center gap-4">
 							<Button
 								size="lg"
-								className="gap-2 text-xs tracking-[0.15em] bg-primary text-primary-foreground hover:bg-accent h-12 px-8 font-mono"
+								className="bg-primary text-primary-foreground hover:bg-accent h-12 gap-2 px-8 font-mono text-xs tracking-[0.15em]"
 							>
-								<Wallet className="w-4 h-4" />
+								<Wallet className="h-4 w-4" />
 								CONNECT WALLET
 							</Button>
 							<Button
 								variant="outline"
 								size="lg"
-								className="gap-2 text-xs tracking-[0.15em] h-12 px-8 bg-transparent font-mono"
+								className="h-12 gap-2 bg-transparent px-8 font-mono text-xs tracking-[0.15em]"
 							>
 								JOIN TELEGRAM
 							</Button>
@@ -349,13 +346,13 @@ export default function Home() {
 							<Link
 								key={i}
 								href="#"
-								className="flex-1 border-b border-border last:border-b-0 p-5 flex items-center justify-between hover:bg-card transition-colors group"
+								className="border-border hover:bg-card group flex flex-1 items-center justify-between border-b p-5 transition-colors last:border-b-0"
 							>
 								<div>
-									<p className="text-[10px] tracking-[0.2em] text-muted-foreground font-mono mb-0.5">{social.label}</p>
-									<p className="text-sm font-mono">{social.handle}</p>
+									<p className="text-muted-foreground mb-0.5 font-mono text-[10px] tracking-[0.2em]">{social.label}</p>
+									<p className="font-mono text-sm">{social.handle}</p>
 								</div>
-								<ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+								<ArrowRight className="text-muted-foreground group-hover:text-primary h-4 w-4 transition-all group-hover:translate-x-1" />
 							</Link>
 						))}
 					</div>

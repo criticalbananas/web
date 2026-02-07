@@ -1,13 +1,28 @@
 import '@/styles/globals.css';
-import type { Metadata } from 'next';
-import { JetBrains_Mono } from "next/font/google";
 
-const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-sans'});
+import type { Metadata } from 'next';
+import { ThemeProvider } from 'next-themes';
+
+import { siteConfig } from '@/app/config/site.config';
+import { TailwindIndicator } from '@/components/helpers/tailwind-indicator';
+import { jetbrainsMono } from '@/lib/fonts';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
-	title: 'Critical Bananas | The Vibe Check Game',
-	description: 'A social volatility game powered by vibes and AI',
-	keywords: ['game', 'crypto', 'gambling', 'vibes', 'ai'],
+	title: {
+		default: siteConfig.name,
+		template: `%s - ${siteConfig.name}`,
+	},
+	description: siteConfig.description,
+	keywords: siteConfig.keywords,
+
+	authors: [
+		{
+			name: siteConfig.author,
+			url: siteConfig.url,
+		},
+	],
+	creator: siteConfig.author,
 };
 
 export default function RootLayout({
@@ -16,9 +31,12 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" suppressHydrationWarning className={jetbrainsMono.variable}>
-			<body className="min-h-screen">
-				{children}
+		<html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
+			<body className={cn('bg-background text-foreground min-h-screen font-sans antialiased', jetbrainsMono.variable)}>
+				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+					{children}
+					<TailwindIndicator />
+				</ThemeProvider>
 			</body>
 		</html>
 	);

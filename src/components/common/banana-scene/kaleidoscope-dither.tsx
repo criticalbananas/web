@@ -1,23 +1,15 @@
 'use client';
 
-import { Effect, BlendFunction } from 'postprocessing';
-import { useMemo, useEffect } from 'react';
-import {
-	Color,
-	Uniform,
-	DataTexture,
-	RedFormat,
-	UnsignedByteType,
-	NearestFilter,
-	RepeatWrapping,
-} from 'three';
+import { BlendFunction, Effect } from 'postprocessing';
+import { useEffect, useMemo } from 'react';
+import { Color, DataTexture, NearestFilter, RedFormat, RepeatWrapping, Uniform, UnsignedByteType } from 'three';
 
 /* ------------------------------------------------------------------ Bayer texture */
 // Original values from the if/else Bayer matrix (values 0-63, divided by 64 in shader)
 const BAYER_MATRIX = new Uint8Array([
-	0, 32, 8, 40, 2, 34, 10, 42, 48, 16, 56, 24, 50, 18, 58, 26, 12, 44, 4, 36, 14, 46, 6, 38, 60,
-	28, 52, 20, 62, 30, 54, 22, 3, 35, 11, 43, 1, 33, 9, 41, 51, 19, 59, 27, 49, 17, 57, 25, 15, 47,
-	7, 39, 13, 45, 5, 37, 63, 31, 55, 23, 61, 29, 53, 21,
+	0, 32, 8, 40, 2, 34, 10, 42, 48, 16, 56, 24, 50, 18, 58, 26, 12, 44, 4, 36, 14, 46, 6, 38, 60, 28, 52, 20, 62, 30, 54,
+	22, 3, 35, 11, 43, 1, 33, 9, 41, 51, 19, 59, 27, 49, 17, 57, 25, 15, 47, 7, 39, 13, 45, 5, 37, 63, 31, 55, 23, 61, 29,
+	53, 21,
 ]);
 
 // Scale to match original: value/64 -> stored as 0-255, read as 0-1 in shader
@@ -94,10 +86,10 @@ export interface KaleidoscopeDitherProps {
 
 /* --------------------------------------------------------------- defaults */
 const DEFAULT_COLORS: DitherColors = {
-    background: '#5e3200', // Lifted from deep brown to a rich coffee
-    accent: '#f08c00',     // Brighter, pure orange
-    secondary: '#ffca59',  // Lighter gold
-    primary: '#fff0b3',    // Pale cream
+	background: '#5e3200', // Lifted from deep brown to a rich coffee
+	accent: '#f08c00', // Brighter, pure orange
+	secondary: '#ffca59', // Lighter gold
+	primary: '#fff0b3', // Pale cream
 };
 
 /* --------------------------------------------------------------- Effect class */

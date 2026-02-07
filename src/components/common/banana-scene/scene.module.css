@@ -1,11 +1,11 @@
 @reference "../../../styles/globals.css";
 
 .container {
-	@apply relative w-full h-full overflow-hidden bg-primary;
+	@apply bg-primary relative h-full w-full overflow-hidden;
 }
 
 .flash {
-	@apply absolute inset-0 pointer-events-none bg-primary;
+	@apply bg-primary pointer-events-none absolute inset-0;
 	animation: fadeOut 4s ease-in-out forwards;
 }
 
