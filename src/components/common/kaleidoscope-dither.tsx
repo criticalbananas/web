@@ -35,24 +35,36 @@ uniform vec3  uColor1;
 uniform vec3  uColor2;
 uniform vec3  uColor3;
 uniform vec3  uBgColor;
+uniform bool  uTransparent;
 uniform sampler2D uBayerTexture;
+uniform float uLumaGamma;
+uniform float uLumaSmoothMin;
+uniform float uLumaSmoothMax;
+uniform float uDitherStrength;
+uniform float uColorBands;
 
 void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor) {
   vec2 pixelUV = floor(uv * resolution / uPixelSize) * uPixelSize / resolution;
   vec4 color = texture2D(inputBuffer, pixelUV);
 
+  if (uTransparent && color.a < 0.01) {
+    outputColor = vec4(0.0);
+    return;
+  }
+
   float luma = dot(color.rgb, vec3(0.299, 0.587, 0.114));
-  luma = pow(luma, 0.7);
-  luma = smoothstep(0.1, 0.9, luma);
+  luma = pow(luma, uLumaGamma);
+  luma = smoothstep(uLumaSmoothMin, uLumaSmoothMax, luma);
 
   float shift = uColorShift * sin(uTime * 0.5);
   luma = fract(luma + shift * 0.3);
 
   vec2 coord = mod(floor(uv * resolution / uGridSize), 8.0) / 8.0;
   float threshold = texture2D(uBayerTexture, coord).r;
+  threshold = mix(0.5, threshold, uDitherStrength);
 
   vec3 result;
-  float level = luma * 3.0;
+  float level = luma * uColorBands;
   int band = int(floor(level));
   float fractional = fract(level);
 
@@ -64,7 +76,12 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
     result = (fractional > threshold) ? uColor3 : uBgColor;
   }
 
-  outputColor = vec4(result, 1.0);
+  if (uTransparent) {
+    float ditherAlpha = step(threshold, color.a * 3.0) * color.a;
+    outputColor = vec4(result, ditherAlpha);
+  } else {
+    outputColor = vec4(result, 1.0);
+  }
 }
 `;
 
@@ -82,6 +99,12 @@ export interface KaleidoscopeDitherProps {
 	colorShift?: number;
 	colors?: DitherColors;
 	opacity?: number;
+	transparent?: boolean;
+	lumaGamma?: number;
+	lumaSmoothMin?: number;
+	lumaSmoothMax?: number;
+	ditherStrength?: number;
+	colorBands?: number;
 }
 
 /* --------------------------------------------------------------- defaults */
@@ -100,6 +123,12 @@ class KaleidoscopeDitherEffect extends Effect {
 		colorShift = 0.4,
 		colors = DEFAULT_COLORS,
 		opacity = 0.6,
+		transparent = false,
+		lumaGamma = 0.7,
+		lumaSmoothMin = 0.1,
+		lumaSmoothMax = 0.9,
+		ditherStrength = 1.0,
+		colorBands = 3.0,
 	}: KaleidoscopeDitherProps = {}) {
 		const uniforms = new Map<string, Uniform>([
 			['uGridSize', new Uniform(gridSize)],
@@ -110,7 +139,13 @@ class KaleidoscopeDitherEffect extends Effect {
 			['uColor2', new Uniform(new Color(colors.secondary))],
 			['uColor3', new Uniform(new Color(colors.accent))],
 			['uBgColor', new Uniform(new Color(colors.background))],
+			['uTransparent', new Uniform(transparent)],
 			['uBayerTexture', new Uniform(bayerTexture)],
+			['uLumaGamma', new Uniform(lumaGamma)],
+			['uLumaSmoothMin', new Uniform(lumaSmoothMin)],
+			['uLumaSmoothMax', new Uniform(lumaSmoothMax)],
+			['uDitherStrength', new Uniform(ditherStrength)],
+			['uColorBands', new Uniform(colorBands)],
 		]);
 
 		super('KaleidoscopeDitherEffect', FRAGMENT, {
@@ -122,7 +157,8 @@ class KaleidoscopeDitherEffect extends Effect {
 	}
 
 	update(_renderer: unknown, _inputBuffer: unknown, deltaTime: number) {
-		(this.uniforms.get('uTime') as Uniform<number>).value += deltaTime;
+		const time = this.uniforms.get('uTime');
+		if (time) time.value += deltaTime;
 	}
 }
 
@@ -133,10 +169,41 @@ export default function KaleidoscopeDither({
 	colorShift = 0.4,
 	colors = DEFAULT_COLORS,
 	opacity = 0.6,
+	transparent = false,
+	lumaGamma = 0.7,
+	lumaSmoothMin = 0.1,
+	lumaSmoothMax = 0.9,
+	ditherStrength = 1.0,
+	colorBands = 3.0,
 }: KaleidoscopeDitherProps) {
 	const effect = useMemo(
-		() => new KaleidoscopeDitherEffect({ gridSize, pixelSize, colorShift, colors, opacity }),
-		[gridSize, pixelSize, colorShift, colors, opacity]
+		() =>
+			new KaleidoscopeDitherEffect({
+				gridSize,
+				pixelSize,
+				colorShift,
+				colors,
+				opacity,
+				transparent,
+				lumaGamma,
+				lumaSmoothMin,
+				lumaSmoothMax,
+				ditherStrength,
+				colorBands,
+			}),
+		[
+			gridSize,
+			pixelSize,
+			colorShift,
+			colors,
+			opacity,
+			transparent,
+			lumaGamma,
+			lumaSmoothMin,
+			lumaSmoothMax,
+			ditherStrength,
+			colorBands,
+		]
 	);
 
 	useEffect(() => {
