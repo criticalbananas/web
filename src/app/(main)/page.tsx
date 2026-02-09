@@ -1,7 +1,7 @@
 import { ArrowRight, ExternalLink, Fingerprint, Shield, Wallet, Zap } from 'lucide-react';
 import Link from 'next/link';
 
-import BananaScene from '@/components/common/banana-scene';
+import BananaScene from '@/components/common/banana-scene/lazy';
 import { Button } from '@/components/ui/button';
 
 import CountdownTimer from './_components/countdown-timer';

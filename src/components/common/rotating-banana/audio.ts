@@ -4,8 +4,8 @@
  */
 
 const FX_COUNT = 3;
-const FX_PATHS = Array.from({ length: FX_COUNT }, (_, i) => `/audio/fx/fx_${i + 1}.mp3`);
-const SOUNDTRACK_PATH = '/audio/background_audio/soundtrack.mp3';
+const FX_PATHS = Array.from({ length: FX_COUNT }, (_, i) => `/audio/fx/fx_${i + 1}.m4a`);
+const SOUNDTRACK_PATH = '/audio/background_audio/soundtrack.m4a';
 
 const SOUNDTRACK_VOLUME = 0.15;
 const FADE_IN_DURATION = 1.5;

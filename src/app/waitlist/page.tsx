@@ -1,4 +1,4 @@
-import RotatingBananaScene from '@/components/common/rotating-banana';
+import RotatingBananaScene from '@/components/common/rotating-banana/lazy';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
