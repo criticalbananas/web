@@ -132,8 +132,8 @@ export default function RotatingBananaScene() {
 
 	return (
 		<div
-			className={`relative w-full transition-opacity duration-1000 ${mounted ? 'opacity-100' : 'opacity-0'}`}
-			style={{ height: '130%', top: '-15%' }}
+			className={`relative h-full w-full transition-opacity duration-1000 ${mounted ? 'opacity-100' : 'opacity-0'}`}
+			style={{ touchAction: 'none' }}
 		>
 			<Canvas
 				orthographic

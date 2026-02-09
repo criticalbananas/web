@@ -12,15 +12,17 @@ export const metadata: Metadata = {
 
 export default function Waitlist() {
 	return (
-		<div className="mx-auto flex w-full max-w-lg flex-1 flex-col text-center">
-			<div className="flex flex-1 flex-col items-center justify-center gap-8">
+		<div className="mx-auto flex w-full max-w-lg flex-1 flex-col px-2 text-center sm:px-0">
+			<div className="flex flex-1 flex-col items-center justify-center gap-6 sm:gap-8">
 				{/* Hero */}
-				<div className="flex flex-col items-center justify-center gap-4">
-					<div className="relative h-[120px] w-full overflow-visible">
+				<div className="flex flex-col items-center justify-center gap-3 sm:gap-4">
+					<div className="relative h-[140px] w-full overflow-visible sm:h-[120px]">
 						<RotatingBananaScene />
 					</div>
-					<h1 className="tracking-tighter">Ready to Go Bananas?</h1>
-					<p className="text-muted-foreground px-4 sm:px-0">
+					<h1 className="text-3xl tracking-tighter sm:text-4xl md:text-5xl" style={{ textWrap: 'balance' }}>
+						Ready to Go Bananas?
+					</h1>
+					<p className="text-muted-foreground max-w-md" style={{ textWrap: 'pretty' }}>
 						Something appealing is ripening. Join our exclusive waitlist to our launch and get early access before
 						everyone else slips in.
 					</p>

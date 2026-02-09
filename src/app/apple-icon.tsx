@@ -1,16 +1,19 @@
 import { ImageResponse } from 'next/og';
 
-export const size = { width: 64, height: 64 };
+export const size = { width: 180, height: 180 };
 export const contentType = 'image/png';
 
 const BRAND = '#f0a000';
+const BG = '#111111';
 
 function logoSvgDataUrl(fill: string) {
 	const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50.8 31.63"><g fill="${fill}"><path d="M50.8,6.68c-.96,10.92-8.39,20.08-18.42,23.47-10.95,3.7-22.75.26-30.03-8.46-.78-.93-1.32-1.79-2.13-2.63-.19-.2-.24-.46-.22-.73.01-.18,1.46-1.66,2.09-1.47.6.18.7,1.06,1.27,1.35,14.95,7.3,35.39,1.84,44.61-12.04"/><ellipse cx="10.24" cy="11.88" rx="4.26" ry="4.25"/><path d="M43.06,4.25c0,2.35-1.91,4.25-4.26,4.25s-4.26-1.9-4.26-4.25S36.89,0,38.8,0s4.26,1.9,4.26,4.25"/></g></svg>`;
 	return `data:image/svg+xml;base64,${btoa(svg)}`;
 }
 
-export default function Icon() {
+export default function AppleIcon() {
+	const logoSize = 120;
+
 	return new ImageResponse(
 		(
 			<div
@@ -20,10 +23,11 @@ export default function Icon() {
 					display: 'flex',
 					alignItems: 'center',
 					justifyContent: 'center',
+					background: BG,
 				}}
 			>
 				{}
-				<img src={logoSvgDataUrl(BRAND)} width={size.width} height={size.height} alt="" />
+				<img src={logoSvgDataUrl(BRAND)} width={logoSize} height={logoSize} alt="" />
 			</div>
 		),
 		{ ...size }

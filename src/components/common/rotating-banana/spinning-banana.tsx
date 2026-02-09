@@ -118,6 +118,21 @@ export function SpinningBanana({ onPositionChange, onSoundtrackStart, onBounce }
 		}
 	}, [bounce]);
 
+	// Window-level pointerup fallback for touch — catches release outside canvas
+	useEffect(() => {
+		if (!dragging) return;
+		const handleUp = () => {
+			if (!dragRef.current.active) return;
+			dragRef.current.active = false;
+			setDragging(false);
+			if (!dragRef.current.hitLimit) {
+				bounce();
+			}
+		};
+		window.addEventListener('pointerup', handleUp);
+		return () => window.removeEventListener('pointerup', handleUp);
+	}, [dragging, bounce]);
+
 	const onPointerMove = useCallback(
 		(e: { point: THREE.Vector3 }) => {
 			tiltRef.current.x = e.point.x * TILT_SENSITIVITY;
@@ -175,8 +190,9 @@ export function SpinningBanana({ onPositionChange, onSoundtrackStart, onBounce }
 			onPointerOver={() => setHovered(true)}
 			onPointerOut={() => {
 				setHovered(false);
-				setDragging(false);
-				dragRef.current.active = false;
+				if (!dragRef.current.active) {
+					setDragging(false);
+				}
 			}}
 			onPointerDown={onPointerDown}
 			onPointerUp={onPointerUp}
@@ -184,7 +200,7 @@ export function SpinningBanana({ onPositionChange, onSoundtrackStart, onBounce }
 		>
 			<BananaModel scale={0.15} />
 			<mesh visible={false}>
-				<sphereGeometry args={[1, 8, 8]} />
+				<sphereGeometry args={[1.5, 8, 8]} />
 			</mesh>
 		</group>
 	);
