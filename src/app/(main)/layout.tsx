@@ -1,16 +1,9 @@
-import type { ReactNode } from 'react';
-
-import Footer from '@/components/layout/footer';
-import SideNav from '@/components/layout/side-navigation';
-import TopNav from '@/components/layout/top-navigation';
-
-export default function MainLayout({ children }: { children: ReactNode }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
-		<main className="bg-background text-foreground min-h-screen overflow-x-hidden">
-			<SideNav />
-			<TopNav />
-			{children}
-			<Footer />
-		</main>
+		<div className="bg-foreground flex min-h-screen flex-col p-4">
+			<div className="squircle-background squircle squircle-[60px] flex flex-1 flex-col justify-between p-6">
+				{children}
+			</div>
+		</div>
 	);
 }
