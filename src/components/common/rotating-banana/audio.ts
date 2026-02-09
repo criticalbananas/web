@@ -3,7 +3,7 @@
  * Handles bounce SFX (randomized file + pitch) and background soundtrack (play once, replay).
  */
 
-const FX_COUNT = 3;
+const FX_COUNT = 4;
 const FX_PATHS = Array.from({ length: FX_COUNT }, (_, i) => `/audio/fx/fx_${i + 1}.m4a`);
 const SOUNDTRACK_PATH = '/audio/background_audio/soundtrack.m4a';
 
