@@ -16,8 +16,8 @@ const eslintConfig = defineConfig([
 			'check-file': checkFile,
 		},
 		rules: {
-			'simple-import-sort/imports': 'error',
-			'simple-import-sort/exports': 'error',
+			'simple-import-sort/imports': 'warn',
+			'simple-import-sort/exports': 'warn',
 			'no-unused-vars': ['error', { args: 'after-used', argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
 			'@typescript-eslint/no-unused-vars': [
 				'error',

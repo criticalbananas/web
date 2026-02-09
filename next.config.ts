@@ -4,6 +4,14 @@ const nextConfig: NextConfig = {
 	experimental: {
 		optimizePackageImports: ['lucide-react', 'three', '@react-three/drei'],
 	},
+	turbopack: {
+		rules: {
+			'*.svg': {
+				loaders: ['@svgr/webpack'],
+				as: '*.js',
+			},
+		},
+	},
 	async headers() {
 		return [
 			{

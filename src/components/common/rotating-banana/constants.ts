@@ -1,7 +1,7 @@
-export const DRAG_LIMIT_X = 0.8;
+export const DRAG_LIMIT_X = 1.0;
 export const DRAG_LIMIT_Y = 0.4;
 export const FLOAT_SPEED = 1.5;
-export const FLOAT_AMPLITUDE = 0.03;
+export const FLOAT_AMPLITUDE = 0.08;
 export const ROTATION_SPEED = 0.8;
 export const SPRING_BACK_DECAY = 0.88;
 export const TILT_SENSITIVITY = 1.2;

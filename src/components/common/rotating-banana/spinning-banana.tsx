@@ -1,5 +1,5 @@
 import { useFrame } from '@react-three/fiber';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { type RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
 import { BananaModel } from '../banana-scene/banana-model';
@@ -25,10 +25,7 @@ function randomBounceParams() {
 	};
 }
 
-function triggerBounce(
-	bounceRef: React.MutableRefObject<number>,
-	paramsRef: React.MutableRefObject<ReturnType<typeof randomBounceParams>>
-) {
+function triggerBounce(bounceRef: RefObject<number>, paramsRef: RefObject<ReturnType<typeof randomBounceParams>>) {
 	bounceRef.current = 1;
 	paramsRef.current = randomBounceParams();
 	playBounceSound();

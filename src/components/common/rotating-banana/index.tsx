@@ -3,6 +3,7 @@
 import { Preload } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { EffectComposer } from '@react-three/postprocessing';
+import { PauseIcon, PlayIcon } from 'lucide-react';
 import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
@@ -10,7 +11,6 @@ import KaleidoscopeDither from '../kaleidoscope-dither';
 import { playSoundtrack, stopSoundtrack } from './audio';
 import { type BananaPosition, FLOAT_AMPLITUDE, FLOAT_SPEED } from './constants';
 import { SpinningBanana } from './spinning-banana';
-
 /* ------------------------------------------------------------------ Shadow */
 
 const shadowTexture = (() => {
@@ -176,39 +176,7 @@ export default function RotatingBananaScene() {
 					className="text-muted-foreground hover:text-foreground absolute right-1 bottom-1 rounded-full p-1.5 transition-colors"
 					aria-label={soundtrack === 'playing' ? 'Stop soundtrack' : 'Replay soundtrack'}
 				>
-					{soundtrack === 'playing' ? (
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="14"
-							height="14"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							strokeWidth="2"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-						>
-							<rect x="6" y="4" width="4" height="16" />
-							<rect x="14" y="4" width="4" height="16" />
-						</svg>
-					) : (
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="14"
-							height="14"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							strokeWidth="2"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-						>
-							<path d="M17 2l4 4-4 4" />
-							<path d="M3 11v-1a4 4 0 0 1 4-4h14" />
-							<path d="M7 22l-4-4 4-4" />
-							<path d="M21 13v1a4 4 0 0 1-4 4H3" />
-						</svg>
-					)}
+					{soundtrack === 'playing' ? <PauseIcon className="size-4" /> : <PlayIcon className="size-4" />}
 				</button>
 			)}
 		</div>
