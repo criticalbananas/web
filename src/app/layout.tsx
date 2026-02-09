@@ -3,6 +3,7 @@ import '@/styles/globals.css';
 import type { Metadata } from 'next';
 
 import { TailwindIndicator } from '@/components/helpers/tailwind-indicator';
+import { SquircleProvider } from '@/components/providers/squircle-provider';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { siteConfig } from '@/config/site.config';
 import { fontHeading, fontMono, fontSans } from '@/lib/fonts';
@@ -41,7 +42,7 @@ export default function RootLayout({
 				)}
 			>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-					{children}
+					<SquircleProvider>{children}</SquircleProvider>
 					{process.env.NODE_ENV !== 'production' && <TailwindIndicator />}
 				</ThemeProvider>
 			</body>
