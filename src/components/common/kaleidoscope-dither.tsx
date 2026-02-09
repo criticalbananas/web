@@ -191,11 +191,16 @@ export default function KaleidoscopeDither({
 				ditherStrength,
 				colorBands,
 			}),
+		// Use individual color fields to avoid object-reference instability
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[
 			gridSize,
 			pixelSize,
 			colorShift,
-			colors,
+			colors.background,
+			colors.primary,
+			colors.secondary,
+			colors.accent,
 			opacity,
 			transparent,
 			lumaGamma,

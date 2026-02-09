@@ -1,5 +1,3 @@
-'use client';
-
 import { useFrame } from '@react-three/fiber';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
@@ -85,13 +83,18 @@ export function SpinningBanana({ onPositionChange, onSoundtrackStart, onBounce }
 
 	// Override shared model material for this scene
 	useEffect(() => {
+		const clonedMaterials: THREE.MeshStandardMaterial[] = [];
 		ref.current.traverse((child) => {
 			if (child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial) {
 				child.material = child.material.clone();
 				child.material.color.set('#c8a84e');
 				child.material.emissive.set('#000000');
+				clonedMaterials.push(child.material);
 			}
 		});
+		return () => {
+			clonedMaterials.forEach((m) => m.dispose());
+		};
 	}, []);
 
 	const onPointerDown = useCallback(

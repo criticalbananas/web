@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
 
-import Footer from '../../components/layout/footer';
-import SideNav from '../../components/layout/side-navigation';
-import TopNav from '../../components/layout/top-navigation';
+import Footer from '@/components/layout/footer';
+import SideNav from '@/components/layout/side-navigation';
+import TopNav from '@/components/layout/top-navigation';
 
 export default function MainLayout({ children }: { children: ReactNode }) {
 	return (

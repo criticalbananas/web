@@ -64,10 +64,9 @@ interface FloatingEmoji {
 	duration: number;
 }
 
-let emojiIdCounter = 0;
-
 function useBounceEmojis() {
 	const [emojis, setEmojis] = useState<FloatingEmoji[]>([]);
+	const counterRef = useRef(0);
 
 	const spawnBurst = useCallback(() => {
 		if (Math.random() > 1 / 3) return;
@@ -76,7 +75,7 @@ function useBounceEmojis() {
 		const batch: FloatingEmoji[] = [];
 
 		for (let i = 0; i < count; i++) {
-			const id = ++emojiIdCounter;
+			const id = ++counterRef.current;
 			batch.push({
 				id,
 				emoji: group[i % group.length],
@@ -108,7 +107,8 @@ export default function RotatingBananaScene() {
 	const { emojis, spawnBurst } = useBounceEmojis();
 
 	useEffect(() => {
-		setTimeout(() => setMounted(true), 100);
+		const timer = setTimeout(() => setMounted(true), 100);
+		return () => clearTimeout(timer);
 	}, []);
 
 	const handlePositionChange = useCallback((x: number, y: number) => {

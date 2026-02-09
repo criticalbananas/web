@@ -1,6 +1,13 @@
+import type { Metadata } from 'next';
+
 import RotatingBananaScene from '@/components/common/rotating-banana/lazy';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+
+export const metadata: Metadata = {
+	title: 'Waitlist',
+	description: 'Join the Critical Bananas waitlist for early access before everyone else slips in.',
+};
 
 export default function Waitlist() {
 	return (

@@ -7,7 +7,7 @@ export default function SideNav() {
 	return (
 		<nav className="border-border bg-background/90 fixed top-0 left-0 z-50 flex h-full w-14 flex-col items-center justify-between border-r py-8 backdrop-blur-md">
 			<Link href="/" className="h-8 w-8">
-				<Image src="/logo.png" alt="Critical Bananas" width={32} height={32} className="h-full w-full object-contain" />
+				<Image src="/logo.svg" alt="Critical Bananas" width={32} height={32} className="h-full w-full object-contain" />
 			</Link>
 			<div className="flex flex-col gap-8">
 				{NAV_ITEMS.map((label) => (

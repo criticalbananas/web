@@ -4,7 +4,7 @@ import { Environment, Preload } from '@react-three/drei';
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { DepthOfField, EffectComposer, ToneMapping } from '@react-three/postprocessing';
 import { ToneMappingMode } from 'postprocessing';
-import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import { Suspense, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
 
@@ -128,6 +128,11 @@ function CenterLogo() {
 		return svg.paths.flatMap((path) => SVGLoader.createShapes(path).map((shape) => ({ shape })));
 	}, [svg]);
 
+	const logoMaterial = useMemo(
+		() => new THREE.MeshBasicMaterial({ color: '#5e3200', transparent: true, opacity: 0.5, side: THREE.DoubleSide }),
+		[]
+	);
+
 	useFrame((state) => {
 		const t = state.clock.elapsedTime;
 		ref.current.rotation.z = Math.sin(t * 0.8) * 0.02;
@@ -142,9 +147,8 @@ function CenterLogo() {
 			<group scale={[s, -s, s]}>
 				<group position={[-25.4, -15.815, 0]}>
 					{shapes.map(({ shape }, i) => (
-						<mesh key={i}>
+						<mesh key={i} material={logoMaterial}>
 							<shapeGeometry args={[shape]} />
-							<meshBasicMaterial color="#5e3200" transparent opacity={0.5} side={THREE.DoubleSide} />
 						</mesh>
 					))}
 				</group>
@@ -190,12 +194,6 @@ export default function BananaScene({
 	depth = 80,
 	easing = (x: number) => Math.sqrt(1 - Math.pow(x - 1, 2)),
 }: BananaSceneProps) {
-	const [flashKey, setFlashKey] = useState(0);
-
-	useEffect(() => {
-		setFlashKey((key) => key + 1);
-	}, []);
-
 	return (
 		<div className={styles.container}>
 			<div className="absolute inset-0">
@@ -225,7 +223,7 @@ export default function BananaScene({
 				</Canvas>
 			</div>
 
-			<div key={flashKey} className={styles.flash} />
+			<div className={styles.flash} />
 		</div>
 	);
 }

@@ -31,7 +31,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
+		<html lang="en" suppressHydrationWarning className="scroll-smooth">
 			<body
 				className={cn(
 					'bg-background text-foreground min-h-screen font-sans antialiased',
@@ -41,7 +41,7 @@ export default function RootLayout({
 			>
 				<ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
 					{children}
-					<TailwindIndicator />
+					{process.env.NODE_ENV !== 'production' && <TailwindIndicator />}
 				</ThemeProvider>
 			</body>
 		</html>
