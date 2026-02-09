@@ -16,8 +16,8 @@ export default function Waitlist() {
 				<div className="relative h-[120px] w-full overflow-visible">
 					<RotatingBananaScene />
 				</div>
-				<h1 className="text-4xl font-medium tracking-tighter sm:text-5xl">Ready to Go Bananas?</h1>
-				<p className="text-muted-foreground px-4 text-sm leading-6 sm:px-0">
+				<h1 className="tracking-tighter">Ready to Go Bananas?</h1>
+				<p className="text-muted-foreground px-4 sm:px-0">
 					Something appealing is ripening. Join our exclusive waitlist to be critical to our launch and get early access
 					before everyone else slips in.
 				</p>

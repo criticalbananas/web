@@ -123,22 +123,22 @@
 		@apply border-border outline-ring/50;
 	}
 	body {
-		@apply bg-background text-foreground;
+		@apply bg-background text-foreground text-base leading-relaxed;
 	}
 	h1 {
-		@apply font-heading text-3xl font-bold tracking-tight sm:text-4xl;
+		@apply font-heading text-4xl font-bold tracking-tight sm:text-5xl;
 	}
 	h2 {
-		@apply font-heading text-2xl font-semibold tracking-tight;
+		@apply font-heading text-3xl font-bold tracking-tight;
 	}
 	h3 {
-		@apply font-heading text-xl font-semibold tracking-tight;
+		@apply font-heading text-lg font-bold tracking-tight;
 	}
 	h4 {
-		@apply font-heading text-lg font-semibold tracking-tight;
+		@apply font-heading text-base font-semibold tracking-tight;
 	}
 	p {
-		@apply text-sm leading-6;
+		@apply leading-relaxed;
 	}
 }
 
