@@ -40,7 +40,7 @@ export default function RootLayout({
 					fontHeading.variable
 				)}
 			>
-				<ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
+				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
 					{children}
 					{process.env.NODE_ENV !== 'production' && <TailwindIndicator />}
 				</ThemeProvider>
