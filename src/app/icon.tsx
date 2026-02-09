@@ -12,28 +12,26 @@ export const size = {
 export const contentType = 'image/png';
 
 export default function Icon() {
-	// Keep the favicon color in sync with the primary OKLCH color from globals.css
-	const primary = 'oklch(0.843 0.154 80.38)';
+	const primary = '#ff9f00';
 
 	return new ImageResponse(
 		(
 			<div
 				style={{
-					width: '100%',
-					height: '100%',
+					width: size.width,
+					height: size.height,
 					display: 'flex',
 					alignItems: 'center',
 					justifyContent: 'center',
-					borderRadius: 999,
-					background: 'transparent',
+					color: primary,
 				}}
 			>
 				<Logo
-					width={48}
-					height={48}
+					width={size.width}
+					height={size.height}
 					style={{
 						display: 'block',
-						fill: primary,
+						objectFit: 'contain',
 					}}
 				/>
 			</div>
